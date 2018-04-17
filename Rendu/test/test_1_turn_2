@@ -1,0 +1,14 @@
+5
+#nb_tour = 1
+#test 1 tour max
+##start
+sa1 1 2
+##end
+sa2 2 3
+sa3 3 4
+sa4 4 5
+sa1-sa2
+sa1-sa3
+sa3-sa2
+sa1-sa4
+sa4-sa3

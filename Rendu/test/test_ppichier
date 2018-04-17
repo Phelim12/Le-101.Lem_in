@@ -1,0 +1,15 @@
+#ceci est un commentaire
+5
+#nb_tour = 4
+##start
+sa0 1 0
+sa1 2 0
+sa2 3 0
+sa3 4 0
+##end
+sa4 5 0
+sa0-sa1
+sa0-sa3
+sa1-sa2
+sa2-sa4
+sa3-sa4

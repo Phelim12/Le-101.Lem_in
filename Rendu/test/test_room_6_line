@@ -1,0 +1,15 @@
+10
+#nb_tour = 14
+##start
+sa1 1 2
+sa2 2 3
+sa3 3 4
+sa4 4 5
+sa5 5 6
+##end
+sa6 6 7
+sa1-sa2
+sa2-sa3
+sa3-sa4
+sa4-sa5
+sa5-sa6

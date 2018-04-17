@@ -1,0 +1,48 @@
+15
+#nb_tour = 13
+##start
+sa1 1 2
+sa2 2 3
+sa3 3 4
+sa4 4 5
+sa5 5 6
+sa6 6 7
+sa7 7 8
+sa8 8 9
+sa9 9 10
+sa10 10 11
+sa11 11 12
+sa12 12 13
+sa13 13 14
+sa14 14 15
+sa15 15 16
+sa16 16 17
+sa17 17 18
+##end
+sa18 18 19
+sa1-sa2
+sa1-sa3
+sa1-sa4
+sa1-sa5
+sa1-sa6
+sa1-sa7
+sa1-sa8
+sa5-sa8
+sa5-sa9
+sa6-sa9
+sa7-sa9
+sa7-sa10
+sa8-sa9
+sa8-sa11
+sa8-sa12
+sa9-sa10
+sa10-sa14
+sa10-sa15
+sa11-sa12
+sa11-sa16
+sa12-sa13
+sa13-sa14
+sa14-sa15
+sa15-sa17
+sa16-sa18
+sa17-sa18

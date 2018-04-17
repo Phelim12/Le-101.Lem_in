@@ -1,0 +1,20 @@
+20
+#nb_tour = 13
+##start
+sa1 1 2
+sa2 2 3
+sa3 3 4
+sa4 4 5
+sa5 5 6
+##end
+sa6 6 7
+sa7 7 8
+sa1-sa4
+sa1-sa3
+sa3-sa5
+sa3-sa2
+sa4-sa2
+sa2-sa7
+sa7-sa6
+sa3-sa7
+sa5-sa6
