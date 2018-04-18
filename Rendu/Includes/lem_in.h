@@ -21,6 +21,11 @@
 # include "../Libft/Includes/libft.h"
 # define	TRUE 1
 # define	FALSE 0
+# define	P0 params[0]
+# define	P1 params[1]
+# define	P2 params[2]
+# define	P3 params[3]
+
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -34,9 +39,17 @@ typedef struct	s_pos
 	int x;
 }				t_pos;
 
+typedef struct	s_links
+{
+	void			*content;
+	intmax_t		content_size;
+	struct s_list	*next;
+
+}				t_links;
+
 typedef struct 	s_room
 {
-	intmax_t	*link;
+	t_links		*links;
 	t_pos		coord;
 	char 		*name;
 	int			len;
@@ -45,10 +58,48 @@ typedef struct 	s_room
 	int			nb_ants;
 }				t_room;
 
-char	*check_coordinate_of_the_room(t_room *anthill, char **params);
-char	*check_number_of_ants(char **params, int *stage);
-char	*check_links_between_rooms(t_room *anthill, char **params);
-void	*print_error_anthill(char *error, char *line_number, int stage);
-char	*check_error_anthill(t_room *anthill, char **params, int *stage);
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                               fill_anthill.c                               ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+void		add_link(t_room *anthill, char **params);
+intmax_t	*add_link_room(t_room *src, t_room *add);
+void		add_room(t_room **old_anthill, char **params);
+void		modif_anthill(t_room *anthill, char *cmt, int nb_ants);
+void		fill_anthill(t_room **ptr, char **params,  char *cmt, int stage);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             parsing_anthill.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*check_start_end(char *line, char *cmt);
+t_room		*parsing_anthill(t_room *ret, char *cmt, int stage, int cur);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                              check_anthill.c                               ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*check_number_of_ants(char **params, int *stage);
+char		*check_links_between_rooms(t_room *anthill, char **params);
+char		*check_have_end_start(t_room *anthill, int start, int end);
+char		*check_coordinate_of_the_room(t_room *anthill, char **params);
+char		*check_error_anthill(t_room *anthill, char **params, int *stage);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             tools_anthill.c                                ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+int			print_error_argc();
+void		free_anthill(t_room *anthill);
+void		print_anthill(t_room *anthill);
+void		*print_error_anthill(char *error, char *line_number, int stage);
 
 #endif
