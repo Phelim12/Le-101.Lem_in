@@ -26,7 +26,6 @@
 # define	P2 params[2]
 # define	P3 params[3]
 
-
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃            This structure groups position x (width), y (height).           ┃
@@ -39,36 +38,29 @@ typedef struct	s_pos
 	int x;
 }				t_pos;
 
-typedef struct	s_links
-{
-	void			*content;
-	intmax_t		content_size;
-	struct s_list	*next;
-
-}				t_links;
-
 typedef struct 	s_room
 {
-	t_links		*links;
+	intmax_t	*link;
 	t_pos		coord;
 	char 		*name;
 	int			len;
 	int			end;
+	int			size;
 	int			start;
 	int			nb_ants;
 }				t_room;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                               fill_anthill.c                               ┃
+**┃                              tools_parsing.c                               ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void		add_link(t_room *anthill, char **params);
-intmax_t	*add_link_room(t_room *src, t_room *add);
-void		add_room(t_room **old_anthill, char **params);
+intmax_t	*realloc_room(t_room *src);
+char		*check_start_end(char *line, char *cmt);
+void		realloc_anthill(t_room **old_anthill, int size);
 void		modif_anthill(t_room *anthill, char *cmt, int nb_ants);
-void		fill_anthill(t_room **ptr, char **params,  char *cmt, int stage);
+void		*print_error_anthill(char *error, int line_number, int stage);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -76,8 +68,10 @@ void		fill_anthill(t_room **ptr, char **params,  char *cmt, int stage);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*check_start_end(char *line, char *cmt);
+void		add_link(t_room *anthill, char **params);
+void		add_room(t_room **old_anthill, char **params);
 t_room		*parsing_anthill(t_room *ret, char *cmt, int stage, int cur);
+void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -99,7 +93,5 @@ char		*check_error_anthill(t_room *anthill, char **params, int *stage);
 
 int			print_error_argc();
 void		free_anthill(t_room *anthill);
-void		print_anthill(t_room *anthill);
-void		*print_error_anthill(char *error, char *line_number, int stage);
 
 #endif

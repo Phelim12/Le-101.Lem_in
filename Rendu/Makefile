@@ -17,7 +17,7 @@ CC = gcc
 
 NAME = lem-in
 		
-# C_FLAGS = -Wall -Wextra -Werror
+C_FLAGS = -Wall -Wextra -Werror
 
 DIR_INC = Includes/
 
@@ -25,7 +25,7 @@ DIR_SRC = Sources/
 
 DIR_LIB = Libft/
 
-NAME_SRC =	main_lem_in.c check_anthill.c fill_anthill.c parsing_anthill.c\
+NAME_SRC =	main_lem_in.c check_anthill.c tools_parsing.c parsing_anthill.c\
 			tools_lem_in.c
 
 SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
