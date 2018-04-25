@@ -38,9 +38,23 @@ typedef struct	s_pos
 	int x;
 }				t_pos;
 
+typedef struct	s_dijkstra
+{
+	int			len;
+	int			done;
+	uintmax_t	after;
+}				t_dijkstra;
+
+typedef struct	s_way
+{
+	uintmax_t	*branch;
+	int			len_branch;
+}				t_way;
+
 typedef struct 	s_room
 {
-	intmax_t	*link;
+	t_dijkstra	save;
+	uintmax_t	*link;
 	t_pos		coord;
 	char 		*name;
 	int			len;
@@ -56,7 +70,7 @@ typedef struct 	s_room
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-intmax_t	*realloc_room(t_room *src);
+uintmax_t	*realloc_room(t_room *src);
 char		*check_start_end(char *line, char *cmt);
 void		realloc_anthill(t_room **old_anthill, int size);
 void		modif_anthill(t_room *anthill, char *cmt, int nb_ants);

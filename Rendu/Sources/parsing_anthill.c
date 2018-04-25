@@ -28,6 +28,9 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur].start = 0;
 	(*old_anthill)[cur].link = NULL;
 	(*old_anthill)[cur].nb_ants = 0;
+	(*old_anthill)[cur].save.len = 0;
+	(*old_anthill)[cur].save.done = 0;
+	(*old_anthill)[cur].save.after = 0;
 	(*old_anthill)[cur].len = ft_strlen(P0);
 	(*old_anthill)[cur].name = ft_strdup(P0);
 	(*old_anthill)[cur].coord.x = ft_atoi(P1);
@@ -35,6 +38,18 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur + 1].name = NULL;
 	size++;
 }
+
+/*
+t_dijkstra	save;
+	uintmax_t	*link;
+	t_pos		coord;
+	char 		*name;
+	int			len;
+	int			end;
+	int			size;
+	int			start;
+	int			nb_ants;*/
+
 
 void		add_link(t_room *anthill, char **params)
 {
@@ -57,11 +72,11 @@ void		add_link(t_room *anthill, char **params)
 	cur3 = 0;
 	while (anthill[cur1].link && anthill[cur1].link[cur3])
 		cur3++;
-	anthill[cur1].link[cur3] = (intmax_t)(anthill + cur2);
+	anthill[cur1].link[cur3] = (uintmax_t)(anthill + cur2);
 	cur3 = 0;
 	while (anthill[cur2].link && anthill[cur2].link[cur3])
 		cur3++;
-	anthill[cur2].link[cur3] = (intmax_t)(anthill + cur1);
+	anthill[cur2].link[cur3] = (uintmax_t)(anthill + cur1);
 }
 
 void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage)

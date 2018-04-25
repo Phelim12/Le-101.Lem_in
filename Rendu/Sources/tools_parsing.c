@@ -63,13 +63,13 @@ void		*print_error_anthill(char *error, int line_number, int stage)
 	return (NULL);
 }
 
-intmax_t	*realloc_room(t_room *src)
+uintmax_t	*realloc_room(t_room *src)
 {
-	intmax_t	*ret;
+	uintmax_t	*ret;
 	int			cur;
 
 	cur = 0;
-	ret = (intmax_t *)malloc(sizeof(intmax_t) * (src->size + 10));
+	ret = (uintmax_t *)malloc(sizeof(uintmax_t) * (src->size + 10));
 	while ((src->link) && src->link[cur])
 	{
 		ret[cur] = src->link[cur];
@@ -93,6 +93,7 @@ void		realloc_anthill(t_room **old_anthill, int size)
 	{
 		new_anthill[cur] = (*old_anthill)[cur];
 		new_anthill[cur].link = NULL;
+		new_anthill[cur].save = (*old_anthill)[cur].save;
 		new_anthill[cur].name = ft_strdup((*old_anthill)[cur].name);
 		ft_strdel(&(*old_anthill)[cur].name);
 	}
