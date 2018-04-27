@@ -39,18 +39,6 @@ void		add_room(t_room **old_anthill, char **params)
 	size++;
 }
 
-/*
-t_dijkstra	save;
-	uintmax_t	*link;
-	t_pos		coord;
-	char 		*name;
-	int			len;
-	int			end;
-	int			size;
-	int			start;
-	int			nb_ants;*/
-
-
 void		add_link(t_room *anthill, char **params)
 {
 	int	cur1;

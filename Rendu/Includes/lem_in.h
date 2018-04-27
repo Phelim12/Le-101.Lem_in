@@ -48,7 +48,7 @@ typedef struct	s_dijkstra
 typedef struct	s_way
 {
 	uintmax_t	*branch;
-	int			len_branch;
+	int			len;
 }				t_way;
 
 typedef struct 	s_room
@@ -66,11 +66,31 @@ typedef struct 	s_room
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             find_one_road.c                                ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+t_way		follow_rooms(t_room *ptr);
+t_way		search_new_road(t_room *anthill, t_way *tree);
+t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             find_all_roads.c                               ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+int			fast_search(t_way *dirty_tree);
+t_way		*search_all_roads(t_room *anthill, int size);
+void		block_road(t_room **anthill, t_way *tree, int start, int go);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                              tools_parsing.c                               ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
 uintmax_t	*realloc_room(t_room *src);
+int 		size_anthill(t_room *anthill);
 char		*check_start_end(char *line, char *cmt);
 void		realloc_anthill(t_room **old_anthill, int size);
 void		modif_anthill(t_room *anthill, char *cmt, int nb_ants);
@@ -105,7 +125,14 @@ char		*check_error_anthill(t_room *anthill, char **params, int *stage);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+
 int			print_error_argc();
+t_way		ft_branch_null(void);
+t_way		*ft_newtree(int size);
+void		free_tree(t_way *tree);
+uintmax_t	*ft_newumaxtab(int size);
 void		free_anthill(t_room *anthill);
+void		print_anthill(t_room *anthill);
+void		print_tree(t_room *anthill, t_way *tree);
 
 #endif
