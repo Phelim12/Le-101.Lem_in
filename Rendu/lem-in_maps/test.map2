@@ -10,11 +10,11 @@ g 2 2
 ##end
 h 3 1
 a-b
-a-e
-b-c
+a-c
+b-e
+c-f
 c-d
-d-e
-d-h
+d-g
 e-f
-f-g
+f-h
 g-h

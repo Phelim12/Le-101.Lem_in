@@ -27,7 +27,7 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur].size = 20;
 	(*old_anthill)[cur].start = 0;
 	(*old_anthill)[cur].link = NULL;
-	(*old_anthill)[cur].nb_ants = 0;
+	(*old_anthill)[cur].nbr_ants = 0;
 	(*old_anthill)[cur].save.len = 0;
 	(*old_anthill)[cur].save.done = 0;
 	(*old_anthill)[cur].save.after = 0;
@@ -70,7 +70,6 @@ void		add_link(t_room *anthill, char **params)
 void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage)
 {
 	static int	save_nb_ants = 0;
-	t_room		*new_anthill;
 
 	if (!(save_nb_ants) && (save_nb_ants = ft_atoi(P0)))
 		return ;

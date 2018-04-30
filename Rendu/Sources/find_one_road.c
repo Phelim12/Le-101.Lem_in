@@ -20,14 +20,14 @@ t_way		follow_rooms(t_room *ptr)
 
 	cur = ptr->save.len;
 	ret.len = ptr->save.len;
-	ret.branch = ft_newumaxtab(cur);
-	ret.branch[cur--] = (uintmax_t)ptr;
+	ret.road = ft_newumaxtab(cur);
+	ret.road[cur--] = (uintmax_t)ptr;
 	while (!(ptr->start))
 	{
-		ret.branch[cur--] = ptr->save.after;
+		ret.road[cur--] = ptr->save.after;
 		ptr = (t_room *)(ptr->save.after);
 	}
-	ret.branch[cur] = (uintmax_t)ptr;
+	ret.road[cur] = (uintmax_t)ptr;
 	return (ret);
 }
 
@@ -52,7 +52,7 @@ t_room		*refresh_anthill(t_room *anthill, t_room *ptr)
 	return (anthill + cur);
 }
 
-t_way		search_new_road(t_room *anthill, t_way *tree)
+t_way		search_new_road(t_room *anthill, t_way *roads)
 {
 	t_room	*ptr;
 	int		cur;
@@ -64,7 +64,7 @@ t_way		search_new_road(t_room *anthill, t_way *tree)
 	{
 		cur = -1;
 		while (ptr->link[++cur])
-			if (tree->len != 1 && !(((t_room *)(ptr->link[cur]))->start) &&
+			if (roads->len != 1 && !(((t_room *)(ptr->link[cur]))->start) &&
 				((((t_room *)(ptr->link[cur]))->save.len > (ptr->save.len + 1)
 				|| !(((t_room *)(ptr->link[cur]))->save.len)) &&
 				!(((t_room *)(ptr->link[cur]))->save.done)))

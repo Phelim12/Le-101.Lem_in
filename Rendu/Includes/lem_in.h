@@ -47,7 +47,9 @@ typedef struct	s_dijkstra
 
 typedef struct	s_way
 {
-	uintmax_t	*branch;
+	uintmax_t	*road;
+	int			value;
+	int			ants;
 	int			len;
 }				t_way;
 
@@ -61,7 +63,7 @@ typedef struct 	s_room
 	int			end;
 	int			size;
 	int			start;
-	int			nb_ants;
+	int			nbr_ants;
 }				t_room;
 
 /*
@@ -70,7 +72,7 @@ typedef struct 	s_room
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 t_way		follow_rooms(t_room *ptr);
-t_way		search_new_road(t_room *anthill, t_way *tree);
+t_way		search_new_road(t_room *anthill, t_way *roads);
 t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
 
 /*
@@ -79,9 +81,8 @@ t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int			fast_search(t_way *dirty_tree);
-t_way		*search_all_roads(t_room *anthill, int size);
-void		block_road(t_room **anthill, t_way *tree, int start, int go);
+t_way		*search_all_roads_01(t_room *anthill, int size);
+// void		block_road(t_room **anthill, int start, int go);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -93,6 +94,7 @@ uintmax_t	*realloc_room(t_room *src);
 int 		size_anthill(t_room *anthill);
 char		*check_start_end(char *line, char *cmt);
 void		realloc_anthill(t_room **old_anthill, int size);
+void		print_error_no_way(t_room *anthill, t_way *roads);
 void		modif_anthill(t_room *anthill, char *cmt, int nb_ants);
 void		*print_error_anthill(char *error, int line_number, int stage);
 
@@ -128,11 +130,13 @@ char		*check_error_anthill(t_room *anthill, char **params, int *stage);
 
 int			print_error_argc();
 t_way		ft_branch_null(void);
-t_way		*ft_newtree(int size);
-void		free_tree(t_way *tree);
+t_way		*ft_newroads(int size);
+void		free_roads(t_way *roads);
 uintmax_t	*ft_newumaxtab(int size);
 void		free_anthill(t_room *anthill);
 void		print_anthill(t_room *anthill);
-void		print_tree(t_room *anthill, t_way *tree);
+void		print_roads(t_room *anthill, t_way *roads);
+void		reset_anthill(t_room **anthill);
+void		ft_sort_time(t_way *roads);
 
 #endif

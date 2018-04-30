@@ -39,7 +39,7 @@ void		modif_anthill(t_room *anthill, char *cmt, int nb_ants)
 	if (!(ft_strcmp(cmt, "##start")))
 	{
 		anthill[cur].start = 1;
-		anthill[cur].nb_ants = nb_ants;
+		anthill[cur].nbr_ants = nb_ants;
 	}
 	if (!(ft_strcmp(cmt, "##end")))
 		anthill[cur].end = 1;
@@ -61,6 +61,30 @@ void		*print_error_anthill(char *error, int line_number, int stage)
 	ft_putendl_fd(error, 1);
 	ft_strdel(&tmp);
 	return (NULL);
+}
+
+void		print_error_no_way(t_room *anthill, t_way *roads)
+{
+	t_room *end;
+	t_room *start;
+
+	end = anthill;
+	start = anthill;
+	while (!(end->end))
+		end++;
+	while (!(start->start))
+		start++;
+	ft_putstr_fd("Error on the anthill.\n", 2);
+	ft_putstr_fd("No way to go from ", 2);
+	ft_putstr_fd(start->name, 2);
+	ft_putstr_fd(" to ", 2);
+	ft_putstr_fd(end->name, 2);
+	ft_putendl_fd(".", 2);
+	if (roads)
+		free_roads(roads);
+	if (anthill)
+		free_anthill(anthill);
+	exit(1);
 }
 
 uintmax_t	*realloc_room(t_room *src)
