@@ -135,3 +135,4 @@ char	*check_error_anthill(t_room *anthill, char **params, int *stage)
 		return (check_links_between_rooms(anthill, params));
 	return (NULL);
 }
+

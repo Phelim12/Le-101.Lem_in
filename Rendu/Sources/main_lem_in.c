@@ -145,21 +145,50 @@ int		find_nbr_roads(t_way *roads)
 	return (ret);
 }
 
-t_way	*find_best_way(t_way *roads)
+int 	check_intersection(t_way road_a, t_way road_b)
+{
+	int var_1;
+	int	var_2;
+	
+	var_1 = 0;
+	while (road_a.road[(++var_1 + 1)])
+	{
+		var_2 = 0;
+		while (road_b.road[(++var_2 + 1)])
+			if (road_b.road[var_2] == road_a.road[var_1])
+				return (1);
+	}
+	return (0);
+}
+
+t_way	*find_best_way_02(t_way *ptr_1, t_way *ptr_2)
+{
+	t_way	*result;
+	int		var_1;
+	int		var_2;
+
+	var_1 = -1;
+	result = ft_newroads(find_nbr_roads(ptr1));
+	while (ptr_2[++var_1].road)
+	{
+
+	}
+}
+
+t_way	**find_best_way(t_way *roads)
 {
 	int 	nbr_roads;
-	t_way	**ret;
+	t_way	*ret;
 	int 	cur1;
 	int		r1;
 	int		r2;
 
 	r1 = -1;
 	nbr_roads = find_nbr_roads(roads);
-	ret = (t_way **)malloc(sizeof(t_way *) * (((nbr_roads * nbr_roads) + nbr_roads) / 2));
 	while (roads[++r1].road)
 	{
 		r2 = r1;
-		while (roads[++r2].roads)
+		while (roads[++r2].road)
 		{
 			
 		}
@@ -204,6 +233,8 @@ int	main(int argc, char const *argv[])
 			roads = search_all_roads_01(anthill, nbr_rooms);
 			if (!(roads[0].road))
 				print_error_no_way(anthill, roads);
+			if (check_intersection(roads[0], roads[1]))
+				printf("INTER\n");
 			printf("test %d\n", check_nbr_turn(roads, nbr_ants));
 		}
 		/*
@@ -219,17 +250,6 @@ int	main(int argc, char const *argv[])
 		free_anthill(anthill);
 	return (0);
 }
-
-
-r1
-0	7    	* 	*	*	*	*  
-1	10	 	*				   	*	*	*	*
-2	20			*				*			
-3	25			*	*				*		
-4	26			*		*			* 	*	
-5	32		*		*	*	*	*		*	*
-
-
 
 
 
