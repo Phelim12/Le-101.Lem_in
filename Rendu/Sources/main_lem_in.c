@@ -13,19 +13,17 @@
 
 #include "lem_in.h"
 
-void	print_roads(t_room *anthill, t_way *roads)
+void	print_roads(t_way *roads)
 {
 	t_room *test;
 	int cur = 0;
 	int cur1 = -1;
-	int cur2 = 0;
 
-	while (anthill[cur2].name)
-		cur2++;
+	printf("\n\n\n");
 	while (roads[++cur1].len != -1)
 	{
 		cur = 0;
-		printf("\nLEN = %d\t VALUE = %d \tATNS = %d\n\n", roads[cur1].len, roads[cur1].value, roads[cur1].ants);
+		//printf("\nLEN = %d\t VALUE = %d \tATNS = %d\n\n", roads[cur1].len, roads[cur1].value, roads[cur1].ants);
 		while (cur <= roads[cur1].len)
 		{
 			if (roads[cur1].road[cur])
@@ -95,7 +93,7 @@ void	init_roads(t_way *roads, int nbr_ants)
 			roads[cur].ants = nbr_ants;
 		else
 			roads[cur].ants = 0;
-		roads[cur].value = (roads[cur].len + roads[cur].ants);
+		roads[cur].value = (roads[cur].len + roads[cur].ants - 1);
 	}
 }
 
@@ -145,18 +143,23 @@ int		find_nbr_roads(t_way *roads)
 	return (ret);
 }
 
-int 	check_intersection(t_way road_a, t_way road_b)
+int 	check_intersection(t_way *roads, t_way road_b)
 {
 	int var_1;
 	int	var_2;
+	int	var_3;
 	
-	var_1 = 0;
-	while (road_a.road[(++var_1 + 1)])
+	var_1 = -1;
+	while (roads[++var_1].road)
 	{
 		var_2 = 0;
-		while (road_b.road[(++var_2 + 1)])
-			if (road_b.road[var_2] == road_a.road[var_1])
-				return (1);
+		while (roads[var_1].road[(++var_2 + 1)])
+		{
+			var_3 = 0;
+			while (road_b.road[(++var_3 + 1)])
+				if (roads[var_1].road[var_2] == road_b.road[var_3])
+					return (1);
+		}
 	}
 	return (0);
 }
@@ -168,43 +171,54 @@ t_way	*find_best_way_02(t_way *ptr_1, t_way *ptr_2)
 	int		var_2;
 
 	var_1 = -1;
-	result = ft_newroads(find_nbr_roads(ptr1));
+	result = ft_newroads(find_nbr_roads(ptr_1));
 	while (ptr_2[++var_1].road)
 	{
-
+		if (!(var_1))
+			result[0] = ptr_1[0];
+		if (!(check_intersection(result, ptr_2[var_1])))
+			result[(var_1 + 1)] = ptr_2[var_1];
 	}
+	result[(var_1 + 1)] = ft_branch_null();
+	return (result); 
 }
 
-t_way	**find_best_way(t_way *roads)
+t_way	*find_best_way(t_way *roads, int nbr_ants)
 {
-	int 	nbr_roads;
 	t_way	*ret;
-	int 	cur1;
+	t_way	*tmp;
+	int		var;
 	int		r1;
 	int		r2;
 
 	r1 = -1;
-	nbr_roads = find_nbr_roads(roads);
+	ret = NULL;
 	while (roads[++r1].road)
 	{
 		r2 = r1;
 		while (roads[++r2].road)
 		{
-			
+			tmp = find_best_way_02((roads + r1), (roads + r2));
+			var = check_nbr_turn(tmp, nbr_ants);
+			if (!(ret) || var < check_nbr_turn(ret, nbr_ants))
+			{
+				if (ret)
+					free(ret);
+				ret = find_best_way_02((roads + r1), (roads + r2));
+			}
+			free(tmp);
 		}
 	}
 	return (ret);
 }
 
-void	print_way_one_shot(t_room *anthill, int nbr_ants)
+void	print_way_one_loop(t_room *anthill, int nbr_ants)
 {
-	t_room	*start;
 	t_room	*end;
 	int		cur;
 
 	end = anthill;
 	cur = nbr_ants;
-	start = anthill;
 	while (!(end->end))
 		end++;
 	while (--cur > 0)
@@ -212,8 +226,72 @@ void	print_way_one_shot(t_room *anthill, int nbr_ants)
 	ft_printf("L%d-%s\n", (nbr_ants - cur), end->name);
 }
 
+void	print_and_move(t_way *best_way, t_room *ptr_1, t_room *ptr_2, int nbr_ants)
+{
+	if (!(ptr_1->nbr_ants))
+		return ;
+	if (ptr_1->nbr_ants && best_way->value)
+	{
+		if (ptr_1->start)
+		{
+			if (!(best_way->ants))
+				return ;
+			ptr_2->name_ants = (nbr_ants - (--ptr_1->nbr_ants));
+			best_way->ants--;
+		}
+		else
+		{
+			ptr_1->nbr_ants = 0;
+			ptr_2->name_ants = ptr_1->name_ants;
+			ptr_1->name_ants = 0;
+		}
+		if (ptr_2->end)
+			ptr_2->nbr_ants = 0;
+		else
+			ptr_2->nbr_ants = 1;
+		ft_printf("L%d-%s ", ptr_2->name_ants, ptr_2->name);
+	}
+}
+
+int		check_end_print(t_way *best_way)
+{
+	int var;
+
+	var = -1;
+	while (best_way[++var].road)
+		if (best_way[var].value != 0)
+			return (1);
+	return (0);
+}
+
+void	print_way_multi_loops(t_way *best_way, int nbr_ants)
+{
+	t_room	*ptr_1;
+	t_room	*ptr_2;
+	int		var_1;
+	int		var_2;
+
+	var_1 = -1;
+	while (best_way[++var_1].road)
+	{
+		var_2 = best_way[var_1].len;
+		while (--var_2 >= 0)
+		{
+			ptr_1 = ((t_room *)(best_way[var_1].road[var_2]));
+			ptr_2 = ((t_room *)(best_way[var_1].road[var_2 + 1]));
+			print_and_move((best_way + var_1), ptr_1, ptr_2, nbr_ants);
+		}
+		if (best_way[var_1].value)
+			best_way[var_1].value--;
+	}
+	ft_printf("\n");
+	if (check_end_print(best_way))
+		print_way_multi_loops(best_way, nbr_ants);
+}
+
 int	main(int argc, char const *argv[])
 {
+	t_way	*best_way;
 	t_room	*anthill;
 	t_way	*roads;
 	int		nbr_rooms;
@@ -227,15 +305,15 @@ int	main(int argc, char const *argv[])
 		nbr_ants = find_nbr_ants(anthill);
 		nbr_rooms = size_anthill(anthill);
 		if (check_link_start_end(anthill))
-			print_way_one_shot(anthill, nbr_ants);
+			print_way_one_loop(anthill, nbr_ants);
 		else
 		{
 			roads = search_all_roads_01(anthill, nbr_rooms);
 			if (!(roads[0].road))
 				print_error_no_way(anthill, roads);
-			if (check_intersection(roads[0], roads[1]))
-				printf("INTER\n");
-			printf("test %d\n", check_nbr_turn(roads, nbr_ants));
+			best_way = find_best_way(roads, nbr_ants);
+			check_nbr_turn(best_way, nbr_ants);
+			print_way_multi_loops(best_way, nbr_ants);
 		}
 		/*
 		if (!(roads[0].road))
@@ -243,55 +321,10 @@ int	main(int argc, char const *argv[])
 	}
 	if (roads)
 	{
-		print_roads(anthill, roads);
+		print_roads(best_way);	
 		free_roads(roads);
 	}
 	if (anthill)
 		free_anthill(anthill);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

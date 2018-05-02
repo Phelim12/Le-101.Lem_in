@@ -64,6 +64,7 @@ typedef struct 	s_room
 	int			size;
 	int			start;
 	int			nbr_ants;
+	int			name_ants;
 }				t_room;
 
 /*
@@ -135,7 +136,7 @@ void		free_roads(t_way *roads);
 uintmax_t	*ft_newumaxtab(int size);
 void		free_anthill(t_room *anthill);
 void		print_anthill(t_room *anthill);
-void		print_roads(t_room *anthill, t_way *roads);
+void		print_roads(t_way *roads);
 void		reset_anthill(t_room **anthill);
 void		ft_sort_time(t_way *roads);
 
