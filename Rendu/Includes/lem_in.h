@@ -38,13 +38,6 @@ typedef struct	s_pos
 	int x;
 }				t_pos;
 
-typedef struct	s_dijkstra
-{
-	int			len;
-	int			done;
-	uintmax_t	after;
-}				t_dijkstra;
-
 typedef struct	s_way
 {
 	uintmax_t	*road;
@@ -53,15 +46,22 @@ typedef struct	s_way
 	int			len;
 }				t_way;
 
+typedef struct	s_dijk
+{
+	uintmax_t	*link;
+	int			done;
+	int			len;
+}				t_dijk;
+
 typedef struct 	s_room
 {
-	t_dijkstra	save;
+	t_dijk		dijk;
 	uintmax_t	*link;
+	int			size;
 	t_pos		coord;
 	char 		*name;
 	int			len;
 	int			end;
-	int			size;
 	int			start;
 	int			nbr_ants;
 	int			name_ants;
@@ -73,7 +73,7 @@ typedef struct 	s_room
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 t_way		follow_rooms(t_room *ptr);
-t_way		search_new_road(t_room *anthill, t_way *roads);
+t_way		*search_all_roads(t_room *anthill);
 t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
 
 /*

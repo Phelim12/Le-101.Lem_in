@@ -117,7 +117,6 @@ void		realloc_anthill(t_room **old_anthill, int size)
 	{
 		new_anthill[cur] = (*old_anthill)[cur];
 		new_anthill[cur].link = NULL;
-		new_anthill[cur].save = (*old_anthill)[cur].save;
 		new_anthill[cur].name = ft_strdup((*old_anthill)[cur].name);
 		ft_strdel(&(*old_anthill)[cur].name);
 	}

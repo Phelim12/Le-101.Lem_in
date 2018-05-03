@@ -75,19 +75,6 @@ uintmax_t	*ft_newumaxtab(int size)
 	return (ret);
 }
 
-void		reset_anthill(t_room **anthill)
-{
-	int		cur;
-
-	cur = -1;
-	while ((*anthill)[++cur].name)
-	{
-		(*anthill)[cur].save.len = 0;
-		(*anthill)[cur].save.done = 0;
-		(*anthill)[cur].save.after = 0;
-	}
-}
-
 void		free_anthill(t_room *anthill)
 {
 	int cur;

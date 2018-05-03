@@ -13,101 +13,98 @@
 
 #include "lem_in.h"
 
-void		block_road_01(t_room **anthill, int start, int go)
+int			number_links_room(uintmax_t *link)
 {
-	reset_anthill(anthill);
-	while (start <= go)
+	int var_1;
+
+	var_1 = 0;
+	while (link[var_1])
+		var_1++;
+	return (var_1);
+}
+
+t_room		*next_ptr_not_done(t_room *anthill)
+{
+	int var_1;
+	int var_2;
+	int var_3;
+
+	var_2 = 0;
+	var_3 = 0;
+	var_1 = -1;
+	while (anthill[++var_1].name)
+		if (((anthill[var_1].dijk.link) && !(anthill[var_1].dijk.done) && 
+			(var_2 = number_links_room(anthill[var_1].dijk.link)) && 
+			(var_2 < var_3) && !(anthill[var_1].end)) || !(var_3))
+			var_3 = var_2;
+	var_1 = -1;
+	while ((anthill[++var_1].name) && (var_3))
+		if ((anthill[var_1].dijk.link) && !(anthill[var_1].dijk.done) && 
+			(number_links_room(anthill[var_1].dijk.link) == var_3) && 
+			!(anthill[var_1].end))
+			return (anthill + var_1);
+	return (NULL);
+}
+
+void		add_new_link_anthill(t_room *ptr_modif, t_room *ptr_add)
+{
+	int var_1;
+
+	if (ptr_modif->dijk.done)
+		return ;
+	if (!(ptr_modif->dijk.link))
 	{
-		if (((*anthill)[start].end) || ((*anthill)[start].start))
-			start++;
-		else
-			(*anthill)[start++].save.done = 1;
+		ptr_modif->dijk.len = 1;
+		var_1 = number_links_room(ptr_modif->link);
+		ptr_modif->dijk.link = ft_newumaxtab(var_1 + 1);
+		ptr_modif->dijk.link[0] = (uintmax_t)(ptr_add);
+	}
+	else
+	{
+		ptr_modif->dijk.len++;
+		var_1 = number_links_room(ptr_modif->dijk.link);
+		ptr_modif->dijk.link[var_1] = (uintmax_t)(ptr_add);
 	}
 }
 
-void		block_road_02(uintmax_t *ptr1, uintmax_t *ptr2, int go1, int go2)
+void	print_anthill_01(t_room *anthill)
 {
-	int		cur;
+	int cur1;
+	int cur2;
 
-	cur = 0;
-	while (++cur <= go1)
-		((t_room *)(ptr1[cur]))->save.done = 1;
-	cur = 0;
-	while (++cur <= go2)
-		((t_room *)(ptr2[cur]))->save.done = 1;
-}
-
-int			check_new_road(t_way *roads)
-{
-	int		check;
-	int		r1;
-	int		l1;
-
-	r1 = -1;
-	while (roads[++r1].road)
+	cur1 = -1;
+	while (anthill && anthill[++cur1].name)
 	{
-		check = 0;
-		l1 = -1;
-		while (roads[r1].road[++l1])
-			if (((t_room *)(roads[r1].road[l1]))->save.done &&
-				!(((t_room *)(roads[r1].road[l1]))->end) &&
-				!(((t_room *)(roads[r1].road[l1]))->start))
-				check++;
-		if (check == 0)
-			return (0);
-	}
-	return (1);
-}
-
-t_way		*search_all_roads_02(t_room *anthill, t_way *ret, int cur)
-{
-	int		r1;
-	int		r2;
-	int		l1;
-	int		l2;
-
-	r1 = -1;
-	while (ret[++r1].road && !(l1 = 0))
-		while (ret[r1].road[++l1] && ((r2 = -1) == -1))
-			while (ret[++r2].road && !(l2 = 0))
-				while (ret[r2].road[++l2])
-				{
-					reset_anthill(&anthill);
-					block_road_02(ret[r1].road, ret[r2].road, l1, l2);
-					if (check_new_road(ret))
-					{
-						if ((ret[cur] = search_new_road(anthill, ret)).len > 0)
-							cur++;
-						else
-							break ;
-					}
-				}
-	ft_sort_time(ret);
-	return (ret);
-}
-
-t_way		*search_all_roads_01(t_room *anthill, int nb_rooms)
-{
-	t_way	*ret;
-	int		ant1;
-	int		ant2;
-	int		cur;
-
-	cur = 0;
-	ant1 = -1;
-	ret = ft_newroads(nb_rooms);
-	while (anthill[++ant1].name && (ant2 = -1))
-		while (anthill[++ant2].name)
+		printf("name = %s\t", anthill[cur1].name);
+		printf("E = %d\t", anthill[cur1].end);
+		printf("S = %d\t", anthill[cur1].start);
+		printf("DONE = %d\n\n", anthill[cur1].dijk.done);
+		cur2 = 0;
+		while (anthill[cur1].dijk.link && anthill[cur1].dijk.link[cur2])
 		{
-			if (check_new_road(ret) || !(cur))
-			{
-				ret[cur] = search_new_road(anthill, ret);
-				if (ret[cur].len != -1)
-					cur++;
-				else if (ant2)
-					ant2 = nb_rooms;
-			}
-			block_road_01(&anthill, ant1, ant2);
+			printf("new_lien %d = %s\t", cur2, ((t_room *)(anthill[cur1].dijk.link[cur2]))[0].name);
+			cur2++;
 		}
-	return (search_all_roads_02(anthill, ret, cur));
+		printf("\n\n");
+	}
+	printf("\n\n");
+}
+
+t_way		*search_all_roads(t_room *anthill)
+{
+	t_room	*ptr;
+	int		var_1;
+
+	ptr = anthill;
+	while (!(ptr->start))
+		ptr++;
+	while (ptr)
+	{
+		var_1 = -1;
+		while (ptr->link[++var_1])
+			add_new_link_anthill((t_room *)(ptr->link[var_1]), ptr);
+		ptr->dijk.done = 1;
+		ptr = next_ptr_not_done(anthill);
+	}
+	return (NULL);
 }

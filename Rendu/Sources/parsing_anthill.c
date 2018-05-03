@@ -28,9 +28,6 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur].start = 0;
 	(*old_anthill)[cur].link = NULL;
 	(*old_anthill)[cur].nbr_ants = 0;
-	(*old_anthill)[cur].save.len = 0;
-	(*old_anthill)[cur].save.done = 0;
-	(*old_anthill)[cur].save.after = 0;
 	(*old_anthill)[cur].len = ft_strlen(P0);
 	(*old_anthill)[cur].name = ft_strdup(P0);
 	(*old_anthill)[cur].coord.x = ft_atoi(P1);
