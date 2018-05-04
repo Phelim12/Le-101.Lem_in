@@ -67,13 +67,22 @@ typedef struct 	s_room
 	int			name_ants;
 }				t_room;
 
+typedef struct	s_info
+{
+	uintmax_t	*tab_1;
+	int		nbr_rooms;
+	t_way	*roads;
+	t_pos	coord;
+	t_room	*ptr;
+}				t_info;
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                             find_one_road.c                                ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 t_way		follow_rooms(t_room *ptr);
-t_way		*search_all_roads(t_room *anthill);
+int			search_all_roads(t_info *params);
 t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
 
 /*
