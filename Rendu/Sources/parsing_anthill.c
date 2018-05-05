@@ -34,6 +34,7 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur].coord.y = ft_atoi(P2);
 	(*old_anthill)[cur].dijk.len = 0;
 	(*old_anthill)[cur].dijk.done = 0;
+	(*old_anthill)[cur].dijk.link = NULL;
 	(*old_anthill)[cur + 1].name = NULL;
 	size++;
 }

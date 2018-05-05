@@ -67,23 +67,22 @@ typedef struct 	s_room
 	int			name_ants;
 }				t_room;
 
-typedef struct	s_info
-{
-	uintmax_t	*tab_1;
-	int		nbr_rooms;
-	t_way	*roads;
-	t_pos	coord;
-	t_room	*ptr;
-}				t_info;
+
+void	print_way_multi_loops(t_way *best_way, int nbr_ants);
+t_way	*find_best_way(t_way *roads, int nbr_ants);
+int		check_nbr_turn(t_way *roads, int nbr_ants);
+
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                             find_one_road.c                                ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
+
 t_way		follow_rooms(t_room *ptr);
-int			search_all_roads(t_info *params);
-t_room		*refresh_anthill(t_room *anthill, t_room *ptr);
+void		resolve_anthill(t_room *anthill);
+void		recursive_search(t_room *ptr, t_way *roads, uintmax_t *road, int var_2);
+void		fill_new_link_anthill(t_room *anthill);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

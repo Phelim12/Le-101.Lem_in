@@ -288,42 +288,6 @@ void	print_way_multi_loops(t_way *best_way, int nbr_ants)
 		print_way_multi_loops(best_way, nbr_ants);
 }
 
-void	resolve_anthill(t_room *anthill)
-{
-	t_room 	*end;
-	t_info 	params;
-	t_way	*best_way;
-	t_way	*roads;
-	int		nbr_rooms;
-	int		nbr_ants;
-
-	roads = NULL;
-	nbr_rooms = size_anthill(anthill);
-	fill_new_link_anthill(anthill);;
-	end = anthill;
-	while (!(end->end))
-		end++;
-	params.ptr = end;
-	params.coord.x = 0;
-	params.coord.y = 0;
-	params.nbr_rooms = nbr_rooms;
-	params.tab_1 = ft_newumaxtab(params->nbr_rooms);
-	params.roads = ft_newroads(nbr_rooms);
-	search_all_roads(&params);
-	print_anthill_01(anthill);
-	/*if (!(roads[0].road))
-		print_error_no_way(anthill, roads);
-	best_way = find_best_way(roads, nbr_ants);
-	check_nbr_turn(best_way, nbr_ants);
-	print_way_multi_loops(best_way, nbr_ants);*/
-	if (roads)
-	{
-		print_roads(best_way);
-		print_roads(roads);
-		free_roads(roads);
-	}
-}
-
 int	main(int argc, char const *argv[])
 {
 	t_room	*anthill;

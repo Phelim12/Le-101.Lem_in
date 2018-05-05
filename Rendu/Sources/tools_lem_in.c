@@ -58,7 +58,7 @@ t_way		*ft_newroads(int size)
 
 	cur = -1;
 	ret = (t_way *)malloc(sizeof(t_way) * (size + 5));
-	while (++cur < size)
+	while (++cur < (size + 5))
 		ret[cur] = ft_branch_null();
 	return (ret);
 }

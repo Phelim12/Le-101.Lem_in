@@ -26,7 +26,7 @@ DIR_SRC = Sources/
 DIR_LIB = Libft/
 
 NAME_SRC =	main_lem_in.c check_anthill.c tools_parsing.c parsing_anthill.c\
-			tools_lem_in.c find_all_roads.c
+			tools_lem_in.c find_all_roads.c work.c
 
 SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
 
