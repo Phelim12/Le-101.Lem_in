@@ -25,8 +25,10 @@ DIR_SRC = Sources/
 
 DIR_LIB = Libft/
 
-NAME_SRC =	main_lem_in.c check_anthill.c tools_parsing.c parsing_anthill.c\
-			tools_lem_in.c find_all_roads.c work.c
+NAME_SRC =	best_road_group.c find_ways_dijkstra.c parsing_anthill.c \
+			print_solve.c tools_lem_in.c check_anthill.c main_lem_in.c \
+			print_error.c realloc_lem_in.c tools_parsing.c alloc_lem_in.c \
+			free_lem_in.c recover_value.c
 
 SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
 
@@ -36,11 +38,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(DIR_LIB)
-	@$(CC) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
+	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
 	@echo "\033[0;32m✅️   make lem_in.\033[0m"
 
 ./%.o: ./%.c
-	@$(CC) -I $(DIR_INC) -o $@ -c $< 
+	@$(CC) $(C_FLAGS) -I $(DIR_INC) -o $@ -c $< 
 	@echo "\033[0;32m✅️   $@ created.\033[0m"
 
 clean:

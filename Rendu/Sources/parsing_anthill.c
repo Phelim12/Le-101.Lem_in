@@ -13,6 +13,21 @@
 
 #include "lem_in.h"
 
+void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage)
+{
+	static int	save_nb_ants = 0;
+
+	if (!(save_nb_ants) && (save_nb_ants = ft_atoi(P0)))
+		return ;
+	if (stage == 1)
+	{
+		add_room(ptr, params);
+		set_start_and_end(*ptr, cmt, save_nb_ants);
+	}
+	if (stage == 2)
+		add_link(*ptr, params);
+}
+
 void		add_room(t_room **old_anthill, char **params)
 {
 	static int	size = 20;
@@ -34,7 +49,7 @@ void		add_room(t_room **old_anthill, char **params)
 	(*old_anthill)[cur].coord.y = ft_atoi(P2);
 	(*old_anthill)[cur].dijk.len = 0;
 	(*old_anthill)[cur].dijk.done = 0;
-	(*old_anthill)[cur].dijk.link = NULL;
+	(*old_anthill)[cur].dijk.room = 0;
 	(*old_anthill)[cur + 1].name = NULL;
 	size++;
 }
@@ -54,9 +69,9 @@ void		add_link(t_room *anthill, char **params)
 		anthill[cur1].len + 1), ft_strlen(P0 + anthill[cur1].len + 1)))
 		cur2++;
 	if ((anthill[cur1].size++ % 20) == 0)
-		anthill[cur1].link = realloc_room((anthill + cur1));
+		anthill[cur1].link = realloc_links((anthill + cur1));
 	if ((anthill[cur2].size++ % 20) == 0)
-		anthill[cur2].link = realloc_room((anthill + cur2));
+		anthill[cur2].link = realloc_links((anthill + cur2));
 	cur3 = 0;
 	while (anthill[cur1].link && anthill[cur1].link[cur3])
 		cur3++;
@@ -67,46 +82,31 @@ void		add_link(t_room *anthill, char **params)
 	anthill[cur2].link[cur3] = (uintmax_t)(anthill + cur1);
 }
 
-void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage)
+char		**parsing_anthill(t_room **ret, char *cmt, int stage, int cur)
 {
-	static int	save_nb_ants = 0;
-
-	if (!(save_nb_ants) && (save_nb_ants = ft_atoi(P0)))
-		return ;
-	if (stage == 1)
-	{
-		add_room(ptr, params);
-		modif_anthill(*ptr, cmt, save_nb_ants);
-	}
-	if (stage == 2)
-		add_link(*ptr, params);
-}
-
-t_room		*parsing_anthill(t_room *ret, char *cmt, int stage, int cur)
-{
+	char	**result;
 	char	**params;
 	char	*line;
 
-	while (get_next_line(0, &line) > 0)
+	result = realloc_map_anthill(NULL, cur);
+	while (get_next_line(0, &(result[++cur])) > 0)
 	{
-		params = ft_strsplit(line, ' ');
-		cmt = check_start_end(line, cmt);
-		ft_strdel(&line);
-		if ((line = check_error_anthill(ret, params, &stage)))
+		if ((cur) && (cur % 100) == 0)
+			result = realloc_map_anthill(result, cur);
+		params = ft_strsplit(result[cur], ' ');
+		cmt = next_end_or_start(result[cur], cmt);
+		if ((line = check_error_anthill(*ret, params, &stage)))
 		{
-			ft_tabdel(params);
-			free_anthill(ret);
-			get_next_line(-1, &line);
+			parsing_free_all(params, result, *ret);
 			return (print_error_anthill(line, cur, stage));
 		}
 		if (P0[0] != '#')
-			fill_anthill(&ret, params, cmt, stage);
+			fill_anthill(ret, params, cmt, stage);
 		ft_tabdel(params);
-		cur++;
 	}
 	if (stage == 1)
-		free_anthill(ret);
+		parsing_free_all(params, result, *ret);
 	if (stage == 1)
-		return (print_error_anthill("- No links between the rooms.", cur, 2));
-	return (ret);
+		return (print_error_anthill(MSG_29, cur, 2));
+	return (result);
 }

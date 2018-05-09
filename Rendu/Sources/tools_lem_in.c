@@ -13,96 +13,62 @@
 
 #include "lem_in.h"
 
-int			print_error_argc(void)
+int			stay_on_loops(t_way *best_way)
 {
-	ft_putendl_fd("lem-in: take no argument", 2);
-	ft_putendl_fd("usage: lem-in", 2);
+	int var;
+
+	var = -1;
+	while (best_way[++var].road)
+		if (best_way[var].value != 0)
+			return (1);
 	return (0);
 }
 
-t_way		ft_branch_null(void)
+void		reset_anthill_dijkstra(t_room *anthill)
 {
-	t_way ret;
+	int	var;
 
-	ret.road = NULL;
-	ret.len = -1;
-	ret.ants = -1;
-	ret.value = -1;
-	return (ret);
-}
-
-void		free_roads(t_way *roads)
-{
-	int cur;
-
-	cur = -1;
-	while (roads[++cur].road)
-		free(roads[cur].road);
-	free(roads);
-}
-
-int 		size_anthill(t_room *anthill)
-{
-	int	ret;
-	
-	ret = 0;
-	while (anthill[ret].name)
-		ret++;
-	return (ret);
-}
-
-t_way		*ft_newroads(int size)
-{
-	t_way	*ret;
-	int		cur;
-
-	cur = -1;
-	ret = (t_way *)malloc(sizeof(t_way) * (size + 5));
-	while (++cur < (size + 5))
-		ret[cur] = ft_branch_null();
-	return (ret);
-}
-
-uintmax_t	*ft_newumaxtab(int size)
-{
-	uintmax_t	*ret;
-	int			cur;
-
-	cur = -1;
-	ret = (uintmax_t *)malloc(sizeof(uintmax_t) * (size + 5));
-	while (++cur < (size + 5))
-		ret[cur] = 0;
-	return (ret);
-}
-
-void		free_anthill(t_room *anthill)
-{
-	int cur;
-
-	cur = -1;
-	while (anthill && anthill[++cur].name)
+	var = -1;
+	while (anthill[++var].name)
 	{
-		if (anthill[cur].link)
-			free(anthill[cur].link);
-		free(anthill[cur].name);
+		anthill[var].dijk.len = 0;
+		anthill[var].dijk.done = 0;
+		anthill[var].dijk.room = 0;
 	}
-	if (anthill)
-		free(anthill);
 }
 
-void		ft_sort_time(t_way *roads)
+int		check_link_start_end(t_room *anthill)
 {
-	t_way	save;
-	int 	cur;
-	int 	r1;
-	
-	r1 = -1;
-	while (roads[++r1].road)
+	t_room	*ptr1;
+	t_room	*ptr2;
+	int		var;
+
+	var = -1;
+	ptr1 = anthill;
+	while (!(ptr1->start))
+		ptr1++;
+	while (ptr1->link[++var])
 	{
-		cur = (r1 + 1);
-		save = roads[r1];
-		while (--cur > 0 && roads[cur - 1].len > save.len)
-			roads[cur] = roads[cur - 1];
-		roads[cur] = save;
+		ptr2 = ((t_room *)(ptr1->link[var]));
+		if (ptr2->end)
+			return (1);
+	}
+	return (0);
+}
+
+void		sort_ways_short_to_long(t_way *roads)
+{
+	int 	var_1;
+	int 	var_2;
+	t_way	save;
+	
+	var_2 = -1;
+	while (roads[++var_2].road)
+	{
+		var_1 = (var_2 + 1);
+		save = roads[var_2];
+		while (--var_1 > 0 && roads[var_1 - 1].len > save.len)
+			roads[var_1] = roads[var_1 - 1];
+		roads[var_1] = save;
 	}
 }

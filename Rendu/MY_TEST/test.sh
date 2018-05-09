@@ -120,10 +120,6 @@ echo "\n\nsubject1.map\n\n"
 ./lem-in < lem-in_maps/subject1.map
 echo "\n\nsubject2.map\n\n"
 ./lem-in < lem-in_maps/subject2.map
-echo "\n\ntest.map\n\n"
-./lem-in < lem-in_maps/test.map
-echo "\n\ntest.map2\n\n"
-./lem-in < lem-in_maps/test.map2
 echo "\n\nthree_ways\n\n"
 ./lem-in < lem-in_maps/three_ways
 echo "\n\ntwo_ways\n\n"
