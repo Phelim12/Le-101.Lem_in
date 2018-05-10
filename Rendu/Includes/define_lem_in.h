@@ -57,5 +57,7 @@
 # define	MSG_35 " on the number of ants:"
 # define	MSG_36 " on the coordinate of the room:"
 # define	MSG_37 " on the links between rooms:"
-
+# define	MSG_38 "No rooms end and start."
+# define	MSG_39 "No room start."
+# define	MSG_40 "No room end."
 #endif

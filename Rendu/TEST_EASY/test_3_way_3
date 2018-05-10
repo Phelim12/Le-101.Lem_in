@@ -1,0 +1,35 @@
+1
+#test 3 branches fusionnees
+#nb_tour = 4
+##start
+sa1 1 2
+sa2 2 3
+sa3 3 4
+sa4 4 5
+##end
+sa5 5 6
+sa6 6 7
+sa7 7 8
+sa8 8 9
+sa9 9 10
+sa10 10 11
+sa11 11 12
+sa1-sa2
+sa1-sa6
+sa1-sa9
+sa2-sa3
+sa3-sa4
+sa4-sa5
+sa5-sa8
+sa5-sa11
+sa6-sa7
+sa7-sa8
+sa9-sa10
+sa10-sa11
+#creation de lien intermediaire
+sa6-sa3
+sa2-sa10
+sa7-sa4
+sa3-sa11
+sa3-sa10
+sa3-sa9

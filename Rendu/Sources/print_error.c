@@ -15,27 +15,29 @@
 
 int			print_error_argc(const char *name)
 {
-	ft_putendl_fd(MSG_30, 2);
-	ft_putstr_fd(MSG_31, 2);
-	ft_putendl_fd(name, 2);
+	ft_putendl_fd(MSG_30, 1);
+	ft_putstr_fd(MSG_31, 1);
+	ft_putendl_fd(name, 1);
 	return (0);
 }
 
-void		print_error_no_way(t_room *anthill)
+void		print_error_no_way(t_room *anthill, char **map)
 {
 	t_room *start;
 	t_room *end;
 
 	end = end_anthill(anthill);
 	start = start_anthill(anthill);
-	ft_putendl_fd(MSG_32, 2);
-	ft_putstr_fd(MSG_33, 2);
-	ft_putstr_fd(start->name, 2);
-	ft_putstr_fd(" to ", 2);
-	ft_putstr_fd(end->name, 2);
-	ft_putendl_fd(".", 2);
+	ft_putendl_fd(MSG_32, 1);
+	ft_putstr_fd(MSG_33, 1);
+	ft_putstr_fd(start->name, 1);
+	ft_putstr_fd(" to ", 1);
+	ft_putstr_fd(end->name, 1);
+	ft_putendl_fd(".", 1);
 	if (anthill)
 		free_anthill(anthill);
+	if (map)
+		ft_tabdel(map);
 	exit(1);
 }
 

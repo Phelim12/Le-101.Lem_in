@@ -97,7 +97,7 @@ char		**parsing_anthill(t_room **ret, char *cmt, int stage, int cur)
 		cmt = next_end_or_start(result[cur], cmt);
 		if ((line = check_error_anthill(*ret, params, &stage)))
 		{
-			parsing_free_all(params, result, *ret);
+			parsing_free_all(&params, &result, ret);
 			return (print_error_anthill(line, cur, stage));
 		}
 		if (P0[0] != '#')
@@ -105,7 +105,7 @@ char		**parsing_anthill(t_room **ret, char *cmt, int stage, int cur)
 		ft_tabdel(params);
 	}
 	if (stage == 1)
-		parsing_free_all(params, result, *ret);
+		parsing_free_all(NULL, &result, ret);
 	if (stage == 1)
 		return (print_error_anthill(MSG_29, cur, 2));
 	return (result);

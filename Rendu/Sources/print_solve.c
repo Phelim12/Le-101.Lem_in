@@ -25,10 +25,12 @@ void	print_map(char **map)
 		free(map[var_1]);
 	}
 	ft_putchar('\n');
-	free(map);
+	if (map)
+		free(map);
+	map = NULL;
 }
 
-void	print_way_one_loop(t_room *anthill, int nbr_ants)
+void	print_way_one_loop(t_room *anthill, char **map, int nbr_ants)
 {
 	t_room	*end;
 	int		var;
@@ -40,6 +42,9 @@ void	print_way_one_loop(t_room *anthill, int nbr_ants)
 	while (--var > 0)
 		ft_printf("L%d-%s ", (nbr_ants - var), end->name);
 	ft_printf("L%d-%s\n", (nbr_ants - var), end->name);
+	free_anthill(anthill);
+	ft_tabdel(map);
+	exit(1);
 }
 
 void	print_and_move(t_way *best_way, int var_1, int var_2, int *var_3)

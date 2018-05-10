@@ -44,10 +44,8 @@ int		check_link_start_end(t_room *anthill)
 	int		var;
 
 	var = -1;
-	ptr1 = anthill;
-	while (!(ptr1->start))
-		ptr1++;
-	while (ptr1->link[++var])
+	ptr1 = start_anthill(anthill);
+	while (ptr1->name && ptr1->link[++var])
 	{
 		ptr2 = ((t_room *)(ptr1->link[var]));
 		if (ptr2->end)

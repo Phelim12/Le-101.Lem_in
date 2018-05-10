@@ -1,0 +1,26 @@
+8
+#nb_tour = 7
+##start
+sa1 1 2
+sa2 2 3
+sa3 3 4
+##end
+sa4 4 5
+sa5 5 6
+sa6 6 7
+sa7 7 8
+sa8 8 9
+sa1-sa2
+sa1-sa3
+sa2-sa5
+sa5-sa6
+sa6-sa4
+sa3-sa7
+sa7-sa8
+sa8-sa4
+#creation de lien intermediaire
+sa2-sa3
+sa5-sa7
+sa7-sa6
+#creation d'un raccourci
+sa3-sa6

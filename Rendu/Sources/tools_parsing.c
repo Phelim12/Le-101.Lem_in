@@ -33,7 +33,7 @@ int		how_many_start(t_room *anthill)
 	var = -1;
 	result = 0;
 	while (anthill[++var].name)
-		result += anthill[var].end;
+		result += anthill[var].start;
 	return (result);
 }
 

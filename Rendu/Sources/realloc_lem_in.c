@@ -61,6 +61,7 @@ void		realloc_anthill(t_room **old_anthill, int size)
 		new_anthill[var] = (*old_anthill)[var];
 		new_anthill[var].link = NULL;
 		new_anthill[var].name = ft_strdup((*old_anthill)[var].name);
+		new_anthill[var + 1].name = NULL;
 		ft_strdel(&(*old_anthill)[var].name);
 	}
 	if (size == 20)

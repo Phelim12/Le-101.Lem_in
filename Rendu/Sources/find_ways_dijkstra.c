@@ -69,7 +69,6 @@ t_way		undesrstand_dijkstra(t_room *ptr)
 		result.road[var--] = ptr->dijk.room;
 		ptr = (t_room *)(ptr->dijk.room);
 	}
-	result.road[var] = (uintmax_t)ptr;
 	return (result);
 }
 

@@ -39,10 +39,22 @@ void	free_anthill(t_room *anthill)
 		free(anthill);
 }
 
-void	parsing_free_all(char **params, char **result, t_room *anthill)
+void	parsing_free_all(char ***params, char ***result, t_room **anthill)
 {
-	ft_tabdel(params);
-	ft_tabdel(result);
-	free_anthill(anthill);
+	if (params)
+	{
+		ft_tabdel(*(params));
+		*(params)= NULL;
+	}
+	if (result)
+	{
+		ft_tabdel(*(result));
+		*(result)= NULL;
+	}
+	if (anthill)
+	{
+		free_anthill(*(anthill));
+		*(anthill) = NULL;
+	}
 	get_next_line(-1, NULL);
 }

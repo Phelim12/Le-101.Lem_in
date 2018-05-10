@@ -1,0 +1,9 @@
+5
+#nb_tour = 6
+##start
+sa1 1 2
+sa2 2 3
+##end
+sa3 3 4
+sa1-sa2
+sa2-sa3

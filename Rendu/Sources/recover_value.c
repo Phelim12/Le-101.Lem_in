@@ -18,7 +18,7 @@ t_room		*end_anthill(t_room *anthill)
 	t_room *result;
 
 	result = anthill;
-	while (!(result->end))
+	while (result->name && !(result->end))
 		result++;
 	return (result);
 }
@@ -28,7 +28,7 @@ t_room		*start_anthill(t_room *anthill)
 	t_room *result;
 
 	result = anthill;
-	while (!(result->start))
+	while (result->name && !(result->start))
 		result++;
 	return (result);
 }
