@@ -13,7 +13,7 @@
 
 #include "lem_in.h"
 
-void		free_roads(t_way *roads)
+void	free_roads(t_way *roads)
 {
 	int cur;
 
@@ -24,7 +24,7 @@ void		free_roads(t_way *roads)
 		free(roads);
 }
 
-void		free_anthill(t_room *anthill)
+void	free_anthill(t_room *anthill)
 {
 	int cur;
 

@@ -58,9 +58,9 @@ int		check_link_start_end(t_room *anthill)
 
 void		sort_ways_short_to_long(t_way *roads)
 {
+	t_way	save;
 	int 	var_1;
 	int 	var_2;
-	t_way	save;
 	
 	var_2 = -1;
 	while (roads[++var_2].road)

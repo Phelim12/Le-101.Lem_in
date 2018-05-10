@@ -13,53 +13,25 @@
 
 #include "lem_in.h"
 
-/*
-void	print_roads(t_way *roads)
+void	init_params_main(t_room **p1, t_way **p2, t_way **p3, char ***p4)
 {
-	t_room *test;
-	int cur = 0;
-	int cur1 = -1;
-
-	printf("\n\n\n");
-	while (roads[++cur1].road)
-	{
-		cur = 0;
-		while (roads[cur1].road[cur])
-		{
-			test = (t_room *)roads[cur1].road[cur];
-			printf("%s->", test->name);
-			cur++;
-		}
-		
-		printf("VAL = %d\tLEN = %d\tNB_ANTS = %d\n\n", roads[cur1].value, roads[cur1].len, roads[cur1].ants);
-	}
+	*(p1) = NULL;
+	*(p2) = NULL;
+	*(p3) = NULL;
+	*(p4) = NULL;
 }
 
-void	print_anthill(t_room *anthill)
+void	free_params_main(t_room **p1, t_way **p2, t_way **p3, char ***p4)
 {
-	int cur1;
-	int cur2;
-
-	cur1 = -1;
-	while (anthill && anthill[++cur1].name)
-	{
-		printf("name = %s\t", anthill[cur1].name);
-		printf("E = %d\t", anthill[cur1].end);
-		printf("S = %d\t", anthill[cur1].start);
-		printf("NBr_ants = %d\t", anthill[cur1].nbr_ants);
-		printf("Len = %d\t", anthill[cur1].len);
-		if (anthill[cur1].dijk.room)
-			printf("ROOM DIJK = %s\t", ((t_room *)(anthill[cur1].dijk.room))->name);
-		cur2 = 0;
-		while (anthill[cur1].link && anthill[cur1].link[cur2])
-		{
-			printf("lien %d = %s\t", cur2, ((t_room *)(anthill[cur1].link[cur2]))[0].name);
-			cur2++;
-		}
-		printf("\n");
-	}
-	printf("\n\n");
-}*/
+	if (*(p1))
+		free_anthill(*(p1));
+	if (*(p2))
+		free_roads(*(p2));
+	if (*(p3))
+		free(*(p3));
+	if (*(p4))
+		ft_tabdel(*(p4));
+}
 
 int		main(int argc, char const *argv[])
 {
@@ -68,13 +40,10 @@ int		main(int argc, char const *argv[])
 	t_way	*roads;
 	char	**map;
 
-	map = NULL;
-	roads = NULL;
-	outcome = NULL;
-	anthill = NULL;
+	init_params_main(&anthill, &outcome, &roads, &map);
 	if (argc > 1)
 		return (print_error_argc(argv[0]));
-	if ((map = parsing_anthill(&anthill, NULL, 0, -1)))
+	if ((map = parsing_anthill(&anthill, NULL, 0, -1)) && (anthill))
 	{
 		if (check_link_start_end(anthill))
 			print_way_one_loop(anthill, find_nbr_ants(anthill));
@@ -85,10 +54,8 @@ int		main(int argc, char const *argv[])
 		how_many_turn_solve(outcome, (find_nbr_ants(anthill)));
 		print_way_multi_loops(outcome, (find_nbr_ants(anthill)));
 	}
-	if (roads)
-		free_roads(roads);
-	if (outcome)
-		free(outcome);
-	if (anthill)
-		free_anthill(anthill);
+	free_params_main(&anthill, &outcome, &roads, &map);
+	return (0);
 }
+
+
