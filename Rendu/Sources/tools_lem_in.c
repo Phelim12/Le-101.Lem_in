@@ -13,7 +13,7 @@
 
 #include "lem_in.h"
 
-int			stay_on_loops(t_way *best_way)
+int		stay_on_loops(t_way *best_way)
 {
 	int var;
 
@@ -24,7 +24,7 @@ int			stay_on_loops(t_way *best_way)
 	return (0);
 }
 
-void		reset_anthill_dijkstra(t_room *anthill)
+void	reset_anthill_dijkstra(t_room *anthill)
 {
 	int	var;
 
@@ -54,12 +54,12 @@ int		check_link_start_end(t_room *anthill)
 	return (0);
 }
 
-void		sort_ways_short_to_long(t_way *roads)
+void	sort_ways_short_to_long(t_way *roads)
 {
 	t_way	save;
-	int 	var_1;
-	int 	var_2;
-	
+	int		var_1;
+	int		var_2;
+
 	var_2 = -1;
 	while (roads[++var_2].road)
 	{

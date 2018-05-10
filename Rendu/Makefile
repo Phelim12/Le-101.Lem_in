@@ -17,7 +17,7 @@ CC = gcc
 
 NAME = lem-in
 		
-C_FLAGS = -g
+C_FLAGS = 
 
 DIR_INC = Includes/
 

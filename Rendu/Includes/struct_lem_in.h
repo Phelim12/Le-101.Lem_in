@@ -22,8 +22,8 @@
 
 typedef struct	s_pos
 {
-	int	y;
-	int x;
+	int			y;
+	int			x;
 }				t_pos;
 
 typedef struct	s_way
@@ -41,13 +41,13 @@ typedef struct	s_dijk
 	int			len;
 }				t_dijk;
 
-typedef struct 	s_room
+typedef struct	s_room
 {
-	char 		**map;
+	char		**map;
 	t_dijk		dijk;
 	t_pos		coord;
 	uintmax_t	*link;
-	char 		*name;
+	char		*name;
 	int			len;
 	int			end;
 	int			size;

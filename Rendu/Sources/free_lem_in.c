@@ -44,12 +44,12 @@ void	parsing_free_all(char ***params, char ***result, t_room **anthill)
 	if (params)
 	{
 		ft_tabdel(*(params));
-		*(params)= NULL;
+		*(params) = NULL;
 	}
 	if (result)
 	{
 		ft_tabdel(*(result));
-		*(result)= NULL;
+		*(result) = NULL;
 	}
 	if (anthill)
 	{

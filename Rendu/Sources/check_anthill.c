@@ -82,7 +82,7 @@ char	*check_have_end_start(t_room *anthill)
 {
 	int	start;
 	int	end;
-	
+
 	end = how_many_end(anthill);
 	start = how_many_start(anthill);
 	if (end > 1 && start > 1)

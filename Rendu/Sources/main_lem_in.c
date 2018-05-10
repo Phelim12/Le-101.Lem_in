@@ -35,7 +35,7 @@ int		check_error_no_way(t_room *anthill)
 {
 	t_room	*start;
 	t_room	*end;
-	t_way 	way;
+	t_way	way;
 
 	end = end_anthill(anthill);
 	start = start_anthill(anthill);
@@ -46,7 +46,7 @@ int		check_error_no_way(t_room *anthill)
 	if (!(way.road))
 		return (1);
 	else
-		free (way.road);
+		free(way.road);
 	return (0);
 }
 
@@ -75,5 +75,3 @@ int		main(int argc, char const *argv[])
 	free_params_main(&anthill, &roads, &outcome);
 	return (0);
 }
-
-
