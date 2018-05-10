@@ -1,0 +1,31 @@
+10
+##start
+start 55 55
+##end
+end 66 66
+A 1 1
+B 2 2
+C 3 3
+D 4 4
+E 5 5
+F 6 6
+G 7 7
+H 8 8
+start-A
+start-B
+start-C
+A-D
+A-E
+B-D
+B-E
+C-D
+C-E
+D-F
+D-G
+D-H
+E-F
+E-G
+E-H
+end-F
+end-G
+end-H
