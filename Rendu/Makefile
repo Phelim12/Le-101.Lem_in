@@ -17,7 +17,7 @@ CC = gcc
 
 NAME = lem-in
 		
-C_FLAGS = 
+C_FLAGS = -Wall -Wextra -Werror
 
 DIR_INC = Includes/
 
