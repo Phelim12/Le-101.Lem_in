@@ -30,18 +30,23 @@ NAME_SRC =	best_road_group.c find_ways_dijkstra.c parsing_anthill.c \
 			print_error.c realloc_lem_in.c tools_parsing.c alloc_lem_in.c \
 			free_lem_in.c recover_value.c
 
+NAME_INC = lem_in.h define_lem_in.h function_lem_in.h struct_lem_in.h
+
+INC = $(addprefix $(DIR_INC), $(NAME_INC))
+
 SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+	@make -C $(DIR_LIB)
 
 $(NAME): $(OBJ)
 	@make -C $(DIR_LIB)
 	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
 	@echo "\033[0;32m✅️   make lem_in.\033[0m"
 
-./%.o: ./%.c
+./%.o: ./%.c $(INC)
 	@$(CC) $(C_FLAGS) -I $(DIR_INC) -o $@ -c $< 
 	@echo "\033[0;32m✅️   $@ created.\033[0m"
 
