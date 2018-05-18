@@ -30,7 +30,7 @@ void	print_map(char **map)
 	map = NULL;
 }
 
-void	print_way_one_loop(t_room *anthill, char **map, int nbr_ants)
+void	print_way_one_loop(t_room *anthill, int nbr_ants)
 {
 	t_room	*end;
 	int		var;
@@ -43,7 +43,6 @@ void	print_way_one_loop(t_room *anthill, char **map, int nbr_ants)
 		ft_printf("L%d-%s ", (nbr_ants - var), end->name);
 	ft_printf("L%d-%s\n", (nbr_ants - var), end->name);
 	free_anthill(anthill);
-	ft_tabdel(map);
 	exit(1);
 }
 

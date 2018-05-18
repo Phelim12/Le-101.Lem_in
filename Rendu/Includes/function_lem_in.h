@@ -99,8 +99,8 @@ void		*print_error_anthill(char *error, int line_number, int stage);
 */
 
 void		print_map(char **map);
+void		print_way_one_loop(t_room *anthill, int nbr_ants);
 void		print_way_multi_loops(t_way *best_way, int nbr_ants);
-void		print_way_one_loop(t_room *anthill, char **map, int nbr_ants);
 void		print_and_move(t_way *best_way, int var_1, int var_2, int *var_3);
 
 /*

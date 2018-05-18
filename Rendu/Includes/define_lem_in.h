@@ -55,7 +55,7 @@
 # define MSG_33 "No way to go from "
 # define MSG_34 "Error line "
 # define MSG_35 " on the number of ants:"
-# define MSG_36 " on the coordinate of the room:"
+# define MSG_36 " on the coordinates of the room:"
 # define MSG_37 " on the links between rooms:"
 # define MSG_38 "No rooms end and start."
 # define MSG_39 "No room start."
