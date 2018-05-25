@@ -41,14 +41,13 @@ OBJ = $(SRC:.c=.o)
 all: lib $(NAME)
 
 lib: 
-	@if !(make -q -C $(DIR_LIB)); \
-	then \
+	@if !(make -q -C $(DIR_LIB)); then \
 		rm -f $(OBJ); \
 		rm -f $(NAME); \
+		make -C $(DIR_LIB);\
 	fi;
 
 $(NAME): $(OBJ)
-	@make -C $(DIR_LIB)
 	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
 	@echo "\033[0;32m✅️   make $(NAME).\033[0m"
 
@@ -58,12 +57,16 @@ $(NAME): $(OBJ)
 
 clean:
 	@make clean -C $(DIR_LIB)
-	@rm -f $(OBJ)
-	@echo "\033[38;5;202m🗑️   clean $(NAME).\033[0m" 
+	@if [ -e Sources/best_road_group.o ]; then \
+		echo "\033[38;5;202m🗑️   clean $(NAME).\033[0m";\
+	fi;
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@make fclean -C $(DIR_LIB)
-	@rm -f $(NAME)
-	@echo "\033[38;5;196m🗑️   fclean $(NAME).\033[0m" 
+	@if [ -e $(NAME) ]; then \
+		echo "\033[38;5;202m🗑️   fclean $(NAME).\033[0m";\
+	fi;
+	@rm -rf $(NAME)
 
 re: fclean all
