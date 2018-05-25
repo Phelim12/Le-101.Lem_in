@@ -61,9 +61,6 @@ sleep 1
 valgrind --leak-check=full --show-leak-kinds=all ./lem-in < TEST_EASY/test_4_room_ok
 echo "test_4_room_ok\n\n"
 sleep 1
-valgrind --leak-check=full --show-leak-kinds=all ./lem-in < TEST_EASY/test_4_room_unreachable
-echo "test_4_room_unreachable\n\n"
-sleep 1
 valgrind --leak-check=full --show-leak-kinds=all ./lem-in < TEST_EASY/test_antdarin
 echo "test_antdarin\n\n"
 sleep 1

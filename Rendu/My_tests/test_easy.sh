@@ -40,8 +40,6 @@ echo "test_3_way_2\n\n"
 echo "test_3_way_3\n\n"
 ./lem-in < TEST_EASY/test_4_room_ok
 echo "test_4_room_ok\n\n"
-./lem-in < TEST_EASY/test_4_room_unreachable
-echo "test_4_room_unreachable\n\n"
 ./lem-in < TEST_EASY/test_antdarin
 echo "test_antdarin\n\n"
 ./lem-in < TEST_EASY/test_big_trap

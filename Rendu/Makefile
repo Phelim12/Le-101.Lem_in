@@ -38,13 +38,19 @@ SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
-	@make -C $(DIR_LIB)
+all: lib $(NAME)
+
+lib: 
+	@if !(make -q -C $(DIR_LIB)); \
+	then \
+		rm -f $(OBJ); \
+		rm -f $(NAME); \
+	fi;
 
 $(NAME): $(OBJ)
 	@make -C $(DIR_LIB)
 	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
-	@echo "\033[0;32m✅️   make lem_in.\033[0m"
+	@echo "\033[0;32m✅️   make $(NAME).\033[0m"
 
 ./%.o: ./%.c $(INC)
 	@$(CC) $(C_FLAGS) -I $(DIR_INC) -o $@ -c $< 
@@ -53,12 +59,11 @@ $(NAME): $(OBJ)
 clean:
 	@make clean -C $(DIR_LIB)
 	@rm -f $(OBJ)
-	@echo "\033[38;5;202m🗑️   clean lem_in.\033[0m" 
+	@echo "\033[38;5;202m🗑️   clean $(NAME).\033[0m" 
 
 fclean: clean
 	@make fclean -C $(DIR_LIB)
 	@rm -f $(NAME)
-	@echo "\033[38;5;196m🗑️   fclean lem_in.\033[0m" 
+	@echo "\033[38;5;196m🗑️   fclean $(NAME).\033[0m" 
 
 re: fclean all
-	
