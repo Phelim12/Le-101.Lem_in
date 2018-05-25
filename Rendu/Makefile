@@ -19,11 +19,11 @@ NAME = lem-in
 		
 C_FLAGS = -Wall -Wextra -Werror
 
-DIR_INC = Includes/
+DIR_LIB = Libft/
 
 DIR_SRC = Sources/
 
-DIR_LIB = Libft/
+DIR_INC = Includes/
 
 NAME_SRC =	best_road_group.c find_ways_dijkstra.c parsing_anthill.c \
 			print_solve.c tools_lem_in.c check_anthill.c main_lem_in.c \
@@ -38,6 +38,10 @@ SRC = $(addprefix $(DIR_SRC), $(NAME_SRC))
 
 OBJ = $(SRC:.c=.o)
 
+CURSOR = 0
+
+NB_FILES = $(words $(SRC))
+
 all: lib $(NAME)
 
 lib: 
@@ -48,24 +52,26 @@ lib:
 	fi;
 
 $(NAME): $(OBJ)
-	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME) 
-	@echo "\033[0;32m✅️   make $(NAME).\033[0m"
+	@$(CC) $(C_FLAGS) $(OBJ) -L $(DIR_LIB) -lft -o $(NAME)
+	@printf "\r\033[0;32m✅️   make $(NAME) 100%%\033[0m\033[K\n"
 
 ./%.o: ./%.c $(INC)
+	@$(eval CURSOR=$(shell echo $$(($(CURSOR)+1))))
+	@$(eval PERCENT=$(shell echo $$(($(CURSOR)*100/$(NB_FILES)))))
+	@printf "\033[0;32m⌛️   make $(NAME) $(PERCENT)%%\033[0m\033[K\r"
 	@$(CC) $(C_FLAGS) -I $(DIR_INC) -o $@ -c $< 
-	@echo "\033[0;32m✅️   $@ created.\033[0m"
 
 clean:
 	@make clean -C $(DIR_LIB)
 	@if [ -e Sources/best_road_group.o ]; then \
-		echo "\033[38;5;202m🗑️   clean $(NAME).\033[0m";\
+		printf "\r\033[38;5;202m🗑️   clean $(NAME)\033[0m\033[K\n"; \
 	fi;
 	@rm -rf $(OBJ)
 
 fclean: clean
 	@make fclean -C $(DIR_LIB)
 	@if [ -e $(NAME) ]; then \
-		echo "\033[38;5;202m🗑️   fclean $(NAME).\033[0m";\
+		printf "\r\033[38;5;196m🗑️   fclean $(NAME)\033[0m\033[K\n"; \
 	fi;
 	@rm -rf $(NAME)
 

@@ -58,6 +58,9 @@ sleep 1
 valgrind --leak-check=full --show-leak-kinds=all ./lem-in < ./TEST_ERROR/multi_end
 echo multi_end "\n\n"
 sleep 1
+valgrind --leak-check=full --show-leak-kinds=all ./lem-in < ./TEST_ERROR/empty_file
+echo empty_file "\n\n"
+sleep 1
 valgrind --leak-check=full --show-leak-kinds=all ./lem-in < ./TEST_ERROR/multi_start
 echo multi_start "\n\n"
 sleep 1

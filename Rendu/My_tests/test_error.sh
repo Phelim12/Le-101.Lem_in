@@ -42,6 +42,8 @@ echo bad_line_start_2 "\n\n"
 echo multi_end "\n\n"
 ./lem-in < ./TEST_ERROR/multi_start
 echo multi_start "\n\n"
+./lem-in < ./TEST_ERROR/empty_file
+echo empty_file "\n\n"
 ./lem-in < ./TEST_ERROR/no_access_end
 echo no_access_end "\n\n"
 ./lem-in < ./TEST_ERROR/no_ant

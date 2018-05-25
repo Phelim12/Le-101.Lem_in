@@ -56,15 +56,19 @@ char	*check_coordinate_of_the_room(t_room *anthill, char **params)
 
 char	*check_links_between_rooms(t_room *anthill, char **params)
 {
-	int var_1;
-	int var_2;
+	char	*str;
+	int		var_1;
+	int		var_2;
 
 	var_1 = 0;
 	var_2 = 0;
 	if (P0 && P1)
 		return (MSG_15);
-	if (!(ft_strchr(P0, '-')))
+	if (!(str = ft_strchr(P0, '-')))
 		return (MSG_16);
+	if (!(ft_strncmp(P0, (str + 1), ft_strlen(str + 1))) &&
+		P0[ft_strlen(str + 1)] == '-')
+		return (MSG_41);
 	while (anthill[var_1].name && (ft_strncmp(anthill[var_1].name, P0,\
 		anthill[var_1].len) || P0[anthill[var_1].len] != '-'))
 		var_1++;

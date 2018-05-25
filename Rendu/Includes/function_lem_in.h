@@ -99,6 +99,7 @@ void		fill_anthill(t_room **ptr, char **params, char *cmt, int stage);
 */
 
 int			print_error_argc(const char *name);
+void		print_error_empty_file(char **map);
 void		print_error_no_way(t_room *anthill, char **map);
 void		*print_error_anthill(char *error, int line_number, int stage);
 
@@ -108,7 +109,7 @@ void		*print_error_anthill(char *error, int line_number, int stage);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void		print_map(char **map);
+char		**print_map(char **map);
 void		print_way_one_loop(t_room *anthill, int nbr_ants);
 void		print_way_multi_loops(t_way *best_way, int nbr_ants);
 void		print_and_move(t_way *best_way, int var_1, int var_2, int *var_3);

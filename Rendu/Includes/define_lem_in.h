@@ -60,5 +60,7 @@
 # define MSG_38 "No rooms end and start."
 # define MSG_39 "No room start."
 # define MSG_40 "No room end."
+# define MSG_41 "- Same link."
+# define MSG_42 "Error the map is empty."
 
 #endif

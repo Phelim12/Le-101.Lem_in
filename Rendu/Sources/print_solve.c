@@ -13,7 +13,7 @@
 
 #include "lem_in.h"
 
-void	print_map(char **map)
+char	**print_map(char **map)
 {
 	int var_1;
 
@@ -28,6 +28,7 @@ void	print_map(char **map)
 	if (map)
 		free(map);
 	map = NULL;
+	return (NULL);
 }
 
 void	print_way_one_loop(t_room *anthill, int nbr_ants)

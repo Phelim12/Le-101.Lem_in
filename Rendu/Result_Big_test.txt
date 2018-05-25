@@ -1,0 +1,39 @@
+------------------1000_map----------------->
+
+Result of -> My_tests/TEST_VALID/1000_map
+
+Time 			== 		0.146s
+ 
+number of laps	== 		38 laps
+
+Output in -> OUTPUT/BIG_TEST/1000_map_trace
+
+------------------map20k-m----------------->
+
+Result of -> My_tests/BIG_TEST/map20k-m
+
+Time 			== 		3m03s
+ 
+number of laps	== 		8 laps
+
+Output in -> OUTPUT/BIG_TEST/map20k-m_trace
+
+------------------map50k-m----------------->
+
+Result of -> My_tests/BIG_TEST/map50k-m
+
+Time 			== 		10m55s
+ 
+number of laps	== 		12 laps
+
+Output in -> OUTPUT/BIG_TEST/map50k-m_trace
+
+------------------map50k-m----------------->
+
+Result of -> My_tests/BIG_TEST/map50k-300m
+
+Time 			== 		10m55s
+ 
+number of laps	== 		12 laps
+
+Output in -> OUTPUT/BIG_TEST/map50k-300m_trace

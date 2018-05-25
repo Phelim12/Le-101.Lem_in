@@ -21,6 +21,14 @@ int			print_error_argc(const char *name)
 	return (0);
 }
 
+void		print_error_empty_file(char **map)
+{
+	if (!(map))
+		return ;
+	ft_putendl_fd(MSG_42, 2);
+	free(map);
+}
+
 void		print_error_no_way(t_room *anthill, char **map)
 {
 	t_room *start;

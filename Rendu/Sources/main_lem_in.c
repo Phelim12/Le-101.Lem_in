@@ -64,7 +64,7 @@ int		main(int argc, char const *argv[])
 	{
 		if (check_error_no_way(anthill))
 			print_error_no_way(anthill, map);
-		print_map(map);
+		map = print_map(map);
 		if (check_link_start_end(anthill))
 			print_way_one_loop(anthill, find_nbr_ants(anthill));
 		roads = find_ways_dijkstra(anthill);
@@ -72,6 +72,7 @@ int		main(int argc, char const *argv[])
 		how_many_turn_solve(outcome, (find_nbr_ants(anthill)));
 		print_way_multi_loops(outcome, (find_nbr_ants(anthill)));
 	}
+	print_error_empty_file(map);
 	free_params_main(&anthill, &roads, &outcome);
 	return (0);
 }
