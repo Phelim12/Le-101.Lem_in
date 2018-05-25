@@ -28,12 +28,22 @@ number of laps	== 		12 laps
 
 Output in -> OUTPUT/BIG_TEST/map50k-m_trace
 
-------------------map50k-m----------------->
+-----------------map50k-300m--------------->
 
 Result of -> My_tests/BIG_TEST/map50k-300m
 
-Time 			== 		10m55s
+Time 			== 		?h?m?s
  
-number of laps	== 		12 laps
+number of laps	== 		? laps
 
 Output in -> OUTPUT/BIG_TEST/map50k-300m_trace
+
+-----------------map100k-m----------------->
+
+Result of -> My_tests/BIG_TEST/map100k-m
+
+Time 			== 		1h00m03s
+ 
+number of laps	== 		10 laps
+
+Output in -> OUTPUT/BIG_TEST/map100k-m_trace
