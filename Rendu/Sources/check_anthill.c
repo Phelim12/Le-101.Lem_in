@@ -13,6 +13,32 @@
 
 #include "lem_in.h"
 
+char	*check_have_end_start(t_room *anthill)
+{
+	int	start;
+	int	end;
+
+	end = how_many_end(anthill);
+	start = how_many_start(anthill);
+	if (end > 1 && start > 1)
+		return (MSG_19);
+	if (end > 1 && !(start))
+		return (MSG_20);
+	if (start > 1 && !(end))
+		return (MSG_21);
+	if (!(start) && !(end))
+		return (MSG_22);
+	if (!(start))
+		return (MSG_23);
+	if (start > 1)
+		return (MSG_24);
+	if (!(end))
+		return (MSG_25);
+	if (end > 1)
+		return (MSG_26);
+	return (NULL);
+}
+
 char	*check_number_of_ants(char **params, int *stage)
 {
 	if (P0 && P1)
@@ -79,32 +105,6 @@ char	*check_links_between_rooms(t_room *anthill, char **params)
 		var_2++;
 	if (!(anthill[var_2].name))
 		return (MSG_18);
-	return (NULL);
-}
-
-char	*check_have_end_start(t_room *anthill)
-{
-	int	start;
-	int	end;
-
-	end = how_many_end(anthill);
-	start = how_many_start(anthill);
-	if (end > 1 && start > 1)
-		return (MSG_19);
-	if (end > 1 && !(start))
-		return (MSG_20);
-	if (start > 1 && !(end))
-		return (MSG_21);
-	if (!(start) && !(end))
-		return (MSG_22);
-	if (!(start))
-		return (MSG_23);
-	if (start > 1)
-		return (MSG_24);
-	if (!(end))
-		return (MSG_25);
-	if (end > 1)
-		return (MSG_26);
 	return (NULL);
 }
 
