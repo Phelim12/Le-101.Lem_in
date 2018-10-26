@@ -1,22 +1,17 @@
-# Ruby on Rails Tutorial sample application
+# Lem_in project pathfinding
 
-This is the sample application for
-[*Ruby on Rails Tutorial:
-Learn Web Development with Rails*](http://www.railstutorial.org/)
-by [Michael Hartl](http://www.michaelhartl.com/).
+Objectives :
 
-## License
-
-All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/)
-is available jointly under the MIT License and the Beerware License. See
-[LICENSE.md](LICENSE.md) for details.
+* Parcours de graphe 
+* Algorithmes en profondeur 
 
 ## Getting started
 
 To get started with the app, clone the repo and then install the needed gems:
 
 ```
-$ bundle install --without production
+$ git clone https://github.com/Phelim12/Le-101.Lem_in.git
+$ cd Le-101.Lem_in
+$ git submodule init Rendu/Libft
+$ git submodule update Rendu/Libft
 ```
-
-Next, migrate the database:
