@@ -1,4 +1,4 @@
-# Lem_in project pathfinding
+# Lem_in pathfinding project
 
 Objectives :
 
