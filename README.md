@@ -7,7 +7,7 @@ Objectives :
 
 ## Getting started
 
-To get started with the app, clone the repo and then install the needed gems:
+To get started with the app:
 
 ```
 git clone https://github.com/Phelim12/Le-101.Lem_in.git
